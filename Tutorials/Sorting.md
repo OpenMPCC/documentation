@@ -126,6 +126,7 @@ Scripts/mascot.sh -v bubble-sort
 Running /home/dfaranha/projects/MP-SPDZ/Scripts/../mascot-party.x 0 bubble-sort -pn 16954 -h localhost -N 2
 Running /home/dfaranha/projects/MP-SPDZ/Scripts/../mascot-party.x 1 bubble-sort -pn 16954 -h localhost -N 2
 Using statistical security parameter 40
+...
 The following benchmarks are including preprocessing (offline phase).
 Time = 242.044 seconds 
 Data sent = 21954.3 MB in ~29247 rounds (party 0 only; use '-v' for more details)
