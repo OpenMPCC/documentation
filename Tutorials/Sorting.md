@@ -119,7 +119,7 @@ with open("Player-Data/Input-P0-0", "w") as file:
     file.writelines(f"{randint(1, 100)}\n" for _ in range(128))
 ```
 
-Now let's compile and run both programs on `localhost` using the [MASCOT}(https://eprint.iacr.org/2016/505) backend, and look at the performance results. Starting with `bubble-sort.mpc`:
+Now let's compile and run both programs on `localhost` using the [MASCOT](https://eprint.iacr.org/2016/505) backend in the active security / dishonest majority setting, and look at the performance results. Starting with `bubble-sort.mpc`:
 ```bash
 ./compile.py bubble-sort.mpc
 Scripts/mascot.sh -v bubble-sort
