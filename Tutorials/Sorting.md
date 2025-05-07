@@ -103,7 +103,7 @@ def odd_even_mergesort(x):
 To demonstrate the trade-offs between these algorithms, let's try a little demo. After implementing the algorithms in MP-SPDZ, we will compile and run two soring programs with inputs of 128 elements:
 
 ```python
-n = 128  # must be a power of 2
+n = 128  # must be a power of 2 to keep odd-merge-sort simple
 x = [sint.get_input_from(0) for _ in range(n)]  # secret input from party 0
 sorting_algorithm(x) # odd_even_mergesort or bubble_sort
 for i in range(n):
