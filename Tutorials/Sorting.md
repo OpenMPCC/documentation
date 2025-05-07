@@ -100,7 +100,7 @@ def odd_even_mergesort(x):
 
 ## Experimental results
 
-To demonstrate the trade-offs between these algorithms, let's try a little demo. After implementing the algorithms in MP-SPDZ, we will compile and run two soring programs with inputs of 128 elements:
+To demonstrate the trade-offs between these algorithms, let's try a little demo. After implementing the algorithms in MP-SPDZ, we will compile and run two sorting programs with inputs of 128 elements:
 
 ```python
 n = 128  # must be a power of 2 to keep odd-merge-sort simple
