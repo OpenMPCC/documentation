@@ -1,6 +1,6 @@
 # Installation of MP-SPDZ
-In this tutorial we are going to walk you through on how to install MP-SPDZ on your system from source and precompiled binaries.
-We are also covering advanced configuration options that can be enabled during the compilation.
+This tutorial will show you how to install MP-SPDZ on your system from source and precompiled binaries.
+We also cover advanced configuration options that can be enabled during compilation.
 
 ## Source Installation
 The source installation requires that some dependencies have a quite recent version.
