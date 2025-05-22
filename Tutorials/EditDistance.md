@@ -111,7 +111,7 @@ Enable _edaBits_ in the backend protocol, a secret-shared bit type and functions
 The comparison function amounts to computing the XOR between the pairs of bits in each of the nucleotides to compare them, and the XOR between the results of the two comparisons.
 We negate the result such that it outputs `1` if the nucleotides are equal.
 
-```
+```python
 program.use_edabit(True)
 sb = sbits.get_type(1)
 
@@ -153,7 +153,7 @@ With the matrix `T` of comparisons already computed, we convert the results of c
 Notice that we use `@for_range_opt` to execute loops depending on bounds that are provided in the command line, and thus are not known at compile-time.
 
 ```python
-ef edit_distance(A, B):
+def edit_distance(A, B):
     T_bits = compute_comp_matrix(A, B)
     T = Matrix(len(T_bits), len(T_bits[0]), sint)
 
@@ -213,3 +213,41 @@ d = edit_distance(A, B)
 print_ln("Edit distance = %s", d.reveal())
 ```
 
+## Experimental results
+
+Let's now try this idea in practice. After implementing the algorithms in MP-SPDZ, we will compile and run two sorting programs with input strings of 100 nucleotids each.
+The backend of choice will be `spdz2k` as in the original paper, which can be accelerated with edaBits:
+
+```bash
+./compile.py edit-distance.mpc 100 100
+Scripts/spdz2k.sh -v optim_edit_distance-100-100
+Running /home/dfaranha/projects/MP-SPDZ/Scripts/../spdz2k-party.x 0 -v optim_edit_distance-100-100 -pn 11237 -h localhost -N 2
+Running /home/dfaranha/projects/MP-SPDZ/Scripts/../spdz2k-party.x 1 -v optim_edit_distance-100-100 -pn 11237 -h localhost -N 2
+Using SPDZ2k security parameter 64
+Using statistical security parameter 40
+Trying to run 64-bit computation
+Edit distance = 52
+The following benchmarks are including preprocessing (offline phase).
+Time = 92.3301 seconds 
+Data sent = 6775.89 MB in ~738945 rounds (party 0 only)
+Global data sent = 13551.8 MB (all parties)
+```
+
+One runtime optimization we can make is reduce the precision of the arithmetic secret-sharings.
+Because our inputs are bounded in length, we can actually use less than 64 bits to represent shares, for example 16.
+We can make this modification by rebuilding the MP-SPDZ backends with lower precision and running the benchmarks again:
+
+```bash
+make RING_SIZE=16 spdz2k-party.x
+./compile.py -R 16 edit-distance.mpc 100 100
+Scripts/spdz2k.sh -v optim_edit_distance-100-100
+Running /home/dfaranha/projects/MP-SPDZ/Scripts/../spdz2k-party.x 0 optim_edit_distance-100-100 -pn 13321 -h localhost -N 2
+Running /home/dfaranha/projects/MP-SPDZ/Scripts/../spdz2k-party.x 1 optim_edit_distance-100-100 -pn 13321 -h localhost -N 2
+Using SPDZ2k security parameter 64
+Using statistical security parameter 40
+Trying to run 16-bit computation
+Edit distance = 52
+The following benchmarks are including preprocessing (offline phase).
+Time = 35.8789 seconds 
+Data sent = 2041.55 MB in ~559161 rounds (party 0 only; use '-v' for more details)
+Global data sent = 4083.09 MB (all parties)
