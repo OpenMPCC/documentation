@@ -1,4 +1,4 @@
-# Sorting in Secure Multi-Party Computation (MPC)
+# Secure Sorting in MPC
 
 Sorting is a fundamental operation in computer science. Whether you're processing data for analytics, searching for values, or ensuring order for algorithms like binary search, sorting is everywhere.
 But in the context of **secure multi-party computation (MPC)**, even basic tasks like sorting become non-trivial.
