@@ -1,5 +1,5 @@
 
-# Optimized Secure Edit Distance
+# Optimized Secure Edit Distance in MPC
 
 This tutorial explains an **optimized secure computation** of the **edit distance** between two parties using [MP-SPDZ](https://github.com/data61/MP-SPDZ).
 It shows how conversion between Boolean and arithmetic shares can improve performance, and illustrates how **edaBits** in MP-SPDZ can be used for efficient comparisons.
