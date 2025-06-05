@@ -1,4 +1,3 @@
-
 # Optimized Secure Edit Distance in MPC
 
 This tutorial explains an **optimized secure computation** of the **edit distance** between two parties using [MP-SPDZ](https://github.com/data61/MP-SPDZ).
