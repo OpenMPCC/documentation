@@ -7,7 +7,7 @@ Previous papers proposed approaches based on homomorphic encryption and garbled 
 
 ---
 
-# Algorithm in plaintext
+## Algorithm in plaintext
 
 The [edit distance](https://en.wikipedia.org/wiki/Edit_distance) (also known as Levenshtein distance) is a metric for how related two strings of data are.
 It gives the number of operations (insertions, deletions and substitutions) needed to go from string _A_ to string _B_. It is commonly used in genome sequencing and DNA analysis.
@@ -80,7 +80,7 @@ n  | 6  6  5  4  3  3  2  3
 The final edit distance is `D[6][7] = 3`.
 
 
-# Edit distace in MPC
+## Edit distace in MPC
 
 Genomic data is frequently large and highly sensitive, so finding a way to efficiently compute the edit distance metric in a privacy preserving way is quite relevant.
 In the case of genomic data, the characters in _A_ and _B_ are nucleotides (`ATCG`) which can be encoded using only 2 bits each.
@@ -89,7 +89,7 @@ However, note that the algorithm has two different types of operations:
 * Arithmetic between entries of `D` and 1 or the result of a comparison
 This means the MPC approach will involve **mixed arithmetic**, which can be optimized by using [extended doubly-authenticated bits](https://eprint.iacr.org/2020/338) or _edaBits_.
 
-## What Is an edaBit?
+### What Is an edaBit?
 
 An _edaBit_ (efficiently generated bit-decomposed value) is a special type of preprocessed value in MP-SPDZ that provides:
 * A secret-shared number `x`, and
@@ -97,7 +97,7 @@ An _edaBit_ (efficiently generated bit-decomposed value) is a special type of pr
 Both the value and its bits are already secret-shared, generated during the preprocessing phase.
 This means we can switch from the two representations efficiently.
 
-## Algorithm in MPC
+### Algorithm in MPC
 
 We split the algorithm above in two stages, as to minimize the number of conversions. First we compare all characters of `A` and `B` in bitwise representation and store the results of the comparisons in a matrix.
 Next we convert the results of these comparisons to secret-shared integers, and execute the dynamic programming approach in MPC.
