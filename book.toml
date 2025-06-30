@@ -1,0 +1,5 @@
+[book]
+authors = ["OpenMPCC project team"]
+language = "en"
+src = "src"
+title = "OpenMPCC documentation"
