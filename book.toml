@@ -3,6 +3,3 @@ authors = ["OpenMPCC project team"]
 language = "en"
 src = "src"
 title = "OpenMPCC documentation"
-
-[output-html]
-additional-css = ["theme/override.css"]

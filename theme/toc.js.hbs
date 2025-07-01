@@ -8,7 +8,7 @@ class MDBookSidebarScrollbox extends HTMLElement {
         super();
     }
     connectedCallback() {
-        this.innerHTML = '<img id="sidebar-logo" src="images/logo.jpg" width="60%"></img>';
+        this.innerHTML = '<img src="https://cdn.prod.website-files.com/67c448fdcfab327652557940/67c48fc2a38464b2e3568af9_openmpcc.jpg" loading="lazy" width="100%" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="" srcset="https://cdn.prod.website-files.com/67c448fdcfab327652557940/67c48fc2a38464b2e3568af9_openmpcc-p-500.jpg 500w, https://cdn.prod.website-files.com/67c448fdcfab327652557940/67c48fc2a38464b2e3568af9_openmpcc-p-800.jpg 800w, https://cdn.prod.website-files.com/67c448fdcfab327652557940/67c48fc2a38464b2e3568af9_openmpcc-p-1080.jpg 1080w, https://cdn.prod.website-files.com/67c448fdcfab327652557940/67c48fc2a38464b2e3568af9_openmpcc.jpg 1360w" class="footer-logo">';
         this.innerHTML += '{{#toc}}{{/toc}}';
         // Set the current, active page, and reveal it if it's hidden
         let current_page = document.location.href.toString().split("#")[0].split("?")[0];
