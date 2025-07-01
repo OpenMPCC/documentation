@@ -1,0 +1,8 @@
+/* Sidebar logo override  */
+
+.sidebar #sidebar-logo {
+  display: block;
+  height: var(--menu-bar-height);
+  width: 100%;
+  margin: 5px;
+}
