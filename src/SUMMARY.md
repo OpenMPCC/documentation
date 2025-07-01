@@ -3,6 +3,8 @@
 [Introduction](INTRODUCTION.md)
 
 ---
+# Architecture
+- [Architecture](Architecture/Architecture.md)
 # Guides
 - [Getting Started](Getting_Started/README.md)
     - [Installation of MP-SPDZ](Getting_Started/Installation.md)
