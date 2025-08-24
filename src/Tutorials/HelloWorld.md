@@ -24,7 +24,7 @@ The program we have written is now executed using the MASCOT protocol for multi-
 Different protocol are available, and can be used to evaluate the program.
 The list of available protocols and their security guarantees are available at [Protocols](https://mp-spdz.readthedocs.io/en/latest/readme.html#protocols).
 The protocol decides which mathematical property used to do the multiparty computation.
-In the case where we use MASCOT, we are are working in a finite field of size $2^n$.
+In the case where we use MASCOT, so we are working in a finite field of size $2^n$.
 If we for example were working on binary values, we could either use binary secret sharing in the Tiny protocol, or even use garbled circuits with the BMR protocol.
 To keep this simple we will stick with the MASCOT.
 
@@ -40,7 +40,7 @@ Data sent = 0 MB in ~0 rounds (party 0 only; use '-v' for more details)
 Global data sent = 0 MB (all parties)
 ```
 
-As it get quite tedious to run both the compiler and the program each time a change is made, MP-SPDZ provide a script which can do this at once by using the following command
+As it gets quite tedious to run both the compiler and the program each time a change is made, MP-SPDZ provide a script which can do this at once by using the following command
 ``` 
 Scripts/compile-run.py mascot hello_world 
 ```
@@ -308,7 +308,7 @@ We benchmarked the malicious, honest majority version of Shamir secret sharing.
 Furthermore, we can relax the security even more by looking at the semi-honest version of Shamir.
 In this setting every party must follow the protocol, and can only use the knowledge gained during the execution to try to extract information.
 This could be in a case where every party is trusted, but someone might be spying on the communication.
-The result become
+The result becomes
 
 |       | Time (Offline)  | Communication per party|
 | - | - |- |
