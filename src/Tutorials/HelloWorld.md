@@ -120,16 +120,16 @@ In other words the value of the integer is secret shared across the parties, and
 
 When we use the ```sint.get_input_from(i)``` a few things happen.
 First, party ```i``` reads the input from his file.
-Secondly, he secret shares it with the other parties, this is the part that is protocol specific. However when reading formal protocol this will equate to the *Input* command in a MPC setting.
-Now that we have a secret shared values, we can perform many different operations such as ```+, -, *, /```, and even comparisons ```==, != <, >``` etc.
+Secondly, he secret-shares it with the other parties, this is the part that is protocol specific. However, when reading formal protocol this will equate to the *Input* command in a MPC setting.
+Now that we have a secret shared value, we can perform many different operations such as ```+, -, *, /```, and even comparisons ```==, != <, >``` etc.
 
-A thing to note about the high-level interface is that a basic type like the ```sint``` is stored in a so-called register in the virtual machine of MP-SPDZ.
+A thing to note about the high-level interface is that a basic type like the ```sint``` is stored in a so-called register in the MP-SPDZ virtual machine.
 This means that this value is bound to a single thread and can only be accessed by that thread.
 A container type such as ```Array``` is stored on so-called memory in the virtual machine.
 Such types are not bound to a thread, hence can be access across multiple thread, both allowing for shared data or cross thread communication.
 
 So when designing the MPC program these types needs to be considered.
-However it is important to note that a list of basic types (e.g. a list of ```sint```) does not need to be a container type (e.g an ```Array```) the basic type can be used as vector, where each operation is element-wise.
+However, it is important to note that a list of basic types (e.g. a list of ```sint```) does not need to be a container type (e.g an ```Array```) the basic type can be used as vector, where each operation is element-wise.
 We can read a vector as input by using
 ```sint.get_input_form(i, size=n)```
 which reads ```n``` inputs from party ```i``` into a vector.
@@ -137,7 +137,7 @@ which reads ```n``` inputs from party ```i``` into a vector.
 # MP-SPDZ Control Flow
 Due to the compilation step of in MP-SPDZ we cannot use control flow as we would do in python.
 The compiler read the python like code in the ```.mpc``` file and turn it into byte-code that the MP-SPDZ virtual machine can read.
-Due to this compilation step we cannot write the MPC program like a python program, we need to tell te compiler what we are doing.
+Due to this compilation step we cannot write the MPC program like a python program, we need to tell the compiler what we are doing.
 Python loops written in the ```.mpc``` program will be unrolled, hence can have impact on the performance, likewise can only depend on values known at compile time.
 
 ## Looping
@@ -148,7 +148,7 @@ def _(i):
     ...
 ```
 Here ```n``` is the range we loop over as in Python, however it needs to be a public integer, so we cannot for example loop over a ```sint``` type.
-Another important aspect is that results from the loop iterations needs to be passed outside of the loop using an container type (e.g. ```Array```) or by using the ```update``` function on basic types.
+Another important aspect is that results from the loop iterations needs to be passed outside the loop using a container type (e.g. ```Array```) or by using the ```update``` function on basic types.
 
 A simple loop adding together numbers would look like this
 ```
@@ -186,8 +186,8 @@ A simple if-statement on a clear/public values looks as follows
 def _():
     ...
 ```
-Here the condition of the brach is written in the annotation. Hence this conditional piece of code is executed if ```x``` is greater than 0.
-Likewise the if-else-statement looks as follows
+Here the condition of the branch is written in the annotation. Hence, this conditional piece of code is executed if ```x``` is greater than 0.
+Likewise, the if-else-statement looks as follows
 ```
 @if_e(x > 0)
 def _():
@@ -201,7 +201,7 @@ Note that to make values live beyond the scope of the if/else branch we need to 
 
 Next the branching based on secret values (```sint```) works a bit different.
 Here we cannot execute code based on the value of the secret.
-First of all we might not know the exact values, and furthermore executing code based on the exact value will reveal something about the value, thus remove its secrecy.
+First of all, we might not know the exact values, and furthermore executing code based on the exact value will reveal something about the value, thus remove its secrecy.
 What we can do however is use the value as a MUX i.e. as a bit selecting the output.
 The syntax looks as follows
 ```
@@ -247,7 +247,7 @@ Computing square-roots does not result in integers so by rewriting we get
 ```
 which can be computed by integers only.
 
-The code could looks as follows
+The code could look as follows
 ```
 circ_center = sint.get_input_from(0, size = 2)
 radius = sint.get_input_from(0)
@@ -291,20 +291,21 @@ We now benchmark the same program using the HighGear protocol which is based on 
 |Mascot | 1.05s (0.94s) | 59.5MB|
 |HighGear| 27.9s (27.9s) | 414.3 MB|
 
-The results are as expected since homomophic encryption is slower than the OT based approach.
+The results are as expected since homomorphic encryption is slower than the OT based approach.
 The benchmarks can be better suited the specific program by changing the batch-size of the preprocessing by using ``` --batch-size ``` when running the program.
 In our case it changes little regarding the performance of HighGear
 
 Both of the protocols benchmarked have the security model of Malicious, dishonest majority.
-A setting could be where we are ensure that the majority is honest, hence use a protocol in this setting.
-We benchmark the malicious, honest majority version of Shamir
+A setting could be where we are unsure that the majority is honest, hence use a protocol in this setting.
+We benchmarked the malicious, honest majority version of Shamir secret sharing.
+
 |       | Time (Offline)  | Communication per party|
 | - | - |- |
 |Mascot | 1.05s (0.94s) | 59.5MB|
 |HighGear| 27.9s (27.9s) | 414.3 MB|
 |Shamir(Malicious)| 0.091s (0.081s) | 2.44 MB
 
-Furthermore we can relax the security even more by looking at the semi-honest version of Shamir.
+Furthermore, we can relax the security even more by looking at the semi-honest version of Shamir.
 In this setting every party must follow the protocol, and can only use the knowledge gained during the execution to try to extract information.
 This could be in a case where every party is trusted, but someone might be spying on the communication.
 The result become
@@ -317,6 +318,6 @@ The result become
 |Shamir(Semi-Honest) | 0.015s (0.008s) | 0.33 MB
 
 From the few benchmarks conducted the power of MP-SPDZ becomes clear.
-The program can be benchmark using different protocol to see which performs the best.
-Furthermore the program can be optimized to both decrease time consumption and communication very efficiently since MP-SPDZ tracks this information.
+The program can be benchmarked using different protocol to see which performs the best.
+Furthermore, the program can be optimized to both decrease time consumption and communication very efficiently since MP-SPDZ tracks this information.
 To gain a better overview of what the time and communication is spent on the execution of the protocol can be done in verbose mode ```-v``` which report time and communication of each part of the execution.
