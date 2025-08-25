@@ -1,0 +1,1 @@
+This section contains guides on some of the more advanced cryptographic concepts being used and researched in OpenMPCC.
