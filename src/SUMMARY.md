@@ -8,6 +8,8 @@
 # Guides
 - [Getting Started](Getting_Started/README.md)
     - [Installation of MP-SPDZ](Getting_Started/Installation.md)
+- [Cryptographic Concepts](Cryptography/README.md)
+    - [What is MPC?](Cryptography/MPCIntroduction.md)
 - [Tutorials](Tutorials/README.md)
     - [Optimized Secure Edit Distance in MPC](Tutorials/EditDistance.md)
     - [Hello World!](Tutorials/HelloWorld.md)
