@@ -66,7 +66,19 @@ class MDBookSidebarScrollbox extends HTMLElement {
         Array.from(sidebarAnchorToggles).forEach(function (el) {
             el.addEventListener('click', toggleSection);
         });
-        this.innerHTML += '<div class="text-block">powered by</div><a href="https://www.cyberagentur.de/en/programs/ec2/" class="w-inline-block"><img src="https://cdn.prod.website-files.com/67c448fdcfab327652557940/67d1835068b88d1fa15a4aa4_cyberagentur.svg" loading="lazy" width="100" alt="" class="image"></a>';
+        document.addEventListener('DOMContentLoaded', () => {
+        const sidebarScrollbox = document.querySelector('.sidebar-scrollbox');
+        if (sidebarScrollbox) {
+            const logoContainer = document.createElement('div');
+            logoContainer.className = 'sidebar-logo';
+            logoContainer.innerHTML = `
+                <a href="{{ path_to_root }}index.html">
+                    <img src="{{ path_to_root }}images/CA_logo.svg" alt="Logo">
+                </a>
+            `;
+            sidebarScrollbox.appendChild(logoContainer);
+        }
+        });
     }
 }
 window.customElements.define("mdbook-sidebar-scrollbox", MDBookSidebarScrollbox);
